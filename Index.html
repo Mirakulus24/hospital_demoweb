@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediFlow | Healthcare Excellence</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-plus-square"></i> MediFlow</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="doctors.html">Doctors</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="btn-primary">Login</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="badge">Trusted by 20,000+ Patients</span>
+            <h1>Your Health, <br><span class="text-gradient">Our Priority.</span></h1>
+            <p>Access world-class healthcare from the comfort of your home. Book appointments with top specialists and manage your medical history in one secure platform.</p>
+            <div class="hero-btns">
+                <a href="register.html" class="btn-primary">Get Started Now</a>
+                <a href="services.html" class="btn-outline">View Services</a>
+            </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000" 
+         alt="Modern Medical Team" 
+         style="width: 100%; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: rotate(2deg);">
+       </div>
+    </header>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>Our Specialized Departments</h2>
+            <p>We provide a wide range of medical services with state-of-the-art technology.</p>
+        </div>
+        <div class="grid">
+            <div class="card department-card">
+                <i class="fas fa-heartbeat fa-3x"></i>
+                <h3>Cardiology</h3>
+                <p>Advanced heart care and surgical procedures for all ages.</p>
+            </div>
+            <div class="card department-card">
+                <i class="fas fa-brain fa-3x"></i>
+                <h3>Neurology</h3>
+                <p>Specialized treatment for complex brain and nervous system disorders.</p>
+            </div>
+            <div class="card department-card">
+                <i class="fas fa-microscope fa-3x"></i>
+                <h3>Diagnostics</h3>
+                <p>Precision testing with the latest imaging and lab technology.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section testimonials" style="background: var(--light); overflow: hidden;">
+    <div class="section-header">
+        <span class="badge">Success Stories</span>
+        <h2>What Our Patients Say</h2>
+    </div>
+    
+    <div class="testimonial-container" style="max-width: 800px; margin: 0 auto; position: relative; height: 250px;">
+        <div class="testimonial-slide active">
+            <div class="testimonial-content">
+                <i class="fas fa-quote-left"></i>
+                <p>"The care I received at MediFlow was exceptional. The booking process via the portal was seamless, and Dr. Jenkins was incredibly thorough."</p>
+                <h5>— Robert Harrison</h5>
+                <span class="dr-tag">Cardiology Patient</span>
+            </div>
+        </div>
+        <div class="testimonial-slide">
+            <div class="testimonial-content">
+                <i class="fas fa-quote-left"></i>
+                <p>"Finally, a hospital that embraces technology! I could track my lab results from my phone and the staff were always available via the chat assistant."</p>
+                <h5>— Elena Rodriguez</h5>
+                <span class="dr-tag">Neurology Patient</span>
+            </div>
+        </div>
+      </div>
+    
+     <div class="testimonial-dots" style="text-align: center; margin-top: 20px;">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+     </div>
+  </section>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo" style="color: white;"><i class="fas fa-plus-square"></i> MediFlow</a>
+                <p>Leading the way in medical excellence and patient-centric digital healthcare solutions since 2010.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="doctors.html">Our Doctors</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Emergency Help</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Medical Blvd, Health City</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 000-1234</p>
+                <p><i class="fas fa-envelope"></i> contact@mediflow.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MediFlow Hospital Management System. Built for Demo Purposes.</p>
+        </div>
+    </footer>
+</body>
+</html>

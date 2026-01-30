@@ -1,0 +1,412 @@
+:root {
+    --primary: #2a52be;
+    --secondary: #00a884;
+    --dark: #1a202c;
+    --light: #f7fafc;
+    --gray: #718096;
+    --white: #ffffff;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--white);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--gray);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    padding: 100px 5%;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+    min-height: 80vh;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: var(--gray);
+}
+
+
+/* Cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 4rem 5%;
+}
+
+.card {
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+footer {
+    background: var(--dark);
+    color: white;
+    padding: 3rem 5%;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { text-align: center; }
+}
+
+/* Enhanced Hero Styles */
+.text-gradient {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.badge {
+    background: #e0e7ff;
+    color: var(--primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-outline {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Footer Enhancements */
+.main-footer {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 80px 5% 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-brand p { margin: 20px 0; line-height: 1.8; }
+.footer-links h4, .footer-contact h4 { color: white; margin-bottom: 25px; }
+.footer-links ul { list-style: none; }
+.footer-links ul li { margin-bottom: 12px; }
+.footer-links ul li a { color: #94a3b8; text-decoration: none; transition: 0.3s; }
+.footer-links ul li a:hover { color: var(--secondary); padding-left: 5px; }
+
+.social-icons { display: flex; gap: 15px; }
+.social-icons a { color: white; font-size: 1.2rem; transition: 0.3s; }
+.social-icons a:hover { color: var(--secondary); }
+
+.footer-bottom {
+    border-top: 1px solid #1e293b;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 992px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+}
+
+/* Service & Doctor Card Styles */
+.icon-box {
+    width: 60px;
+    height: 60px;
+    background: #eef2ff;
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+}
+
+.service-list {
+    list-style: none;
+    margin-top: 15px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.service-list li {
+    margin-bottom: 8px;
+    color: var(--gray);
+}
+
+.service-list i {
+    color: var(--secondary);
+    margin-right: 10px;
+}
+
+.specialty {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.section-header {
+    text-align: center;
+    padding: 40px 5%;
+}
+
+/* Value Cards */
+.value-card .icon-circle {
+    width: 70px;
+    height: 70px;
+    background: #f1f5ff;
+    color: var(--primary-alt);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1.5rem;
+}
+
+/* Timeline UI */
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding: 2rem 0;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: #e2e8f0;
+}
+.timeline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.time-year {
+    width: 45%;
+    text-align: right;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--primary-alt);
+}
+.time-content {
+    width: 45%;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+/* Doctor Profile Cards */
+.doctor-profile-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+.dr-image-container {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+.dr-image-container img { width: 100%; height: 100%; object-fit: cover; }
+.dr-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(99, 102, 241, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s;
+}
+.doctor-profile-card:hover .dr-overlay { opacity: 1; }
+.dr-details { padding: 1.5rem; text-align: left; }
+.dr-tag {
+    font-size: 0.75rem;
+    background: #eef2ff;
+    color: var(--primary-alt);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+.dr-socials { margin-top: 1rem; color: var(--text-muted); display: flex; gap: 10px; }
+
+/* Add to main.css */
+.stat-item h2 {
+    font-size: 3.5rem;
+    color: var(--primary-alt);
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.dr-status-dot {
+    height: 10px;
+    width: 10px;
+    background-color: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.doctor-profile-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: scale(1.02);
+}
+
+.testimonial-slide {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    text-align: center;
+    padding: 20px;
+}
+
+.testimonial-slide.active {
+    opacity: 1;
+}
+
+.testimonial-content i {
+    font-size: 2rem;
+    color: var(--primary-alt);
+    margin-bottom: 1.5rem;
+    opacity: 0.3;
+}
+
+.testimonial-content p {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #cbd5e1;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dot.active {
+    background-color: var(--primary-alt);
+    width: 30px;
+    border-radius: 10px;
+}

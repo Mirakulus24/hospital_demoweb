@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | MediFlow</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-plus-square"></i> MediFlow</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="doctors.html">Doctors</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+            <li><a href="login.html" class="btn-primary">Login</a></li>
+        </ul>
+    </nav>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>Get In Touch</h2>
+            <p>Have questions? Our team is here to help 24/7.</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start;">
+            <div class="contact-info">
+                <div class="card" style="text-align: left; margin-bottom: 1.5rem;">
+                    <i class="fas fa-map-marker-alt" style="color: var(--primary-alt); font-size: 1.5rem; margin-bottom: 1rem;"></i>
+                    <h4>Our Location</h4>
+                    <p style="color: var(--gray);">123 Medical Blvd, Health City, NY 10001</p>
+                </div>
+                <div class="card" style="text-align: left; margin-bottom: 1.5rem;">
+                    <i class="fas fa-phone-alt" style="color: var(--primary-alt); font-size: 1.5rem; margin-bottom: 1rem;"></i>
+                    <h4>Emergency Call</h4>
+                    <p style="color: var(--primary-alt); font-weight: 700;">+1 (555) 911-0000</p>
+                    <p style="color: var(--gray);">Direct 24/7 Line</p>
+                </div>
+                <div style="height: 300px; width: 100%; border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); margin-top: 20px;">
+                  <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.422199614769!2d-73.98731968459391!3d40.75102507932734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1675200000000!5m2!1sen!2sus" 
+        width="100%" 
+        height="100%" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+            </div>
+
+            <div class="card" style="padding: 3rem;">
+                <form id="contactForm">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="John Doe" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="john@example.com" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Subject</label>
+                        <select style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
+                            <option>Appointment Inquiry</option>
+                            <option>General Feedback</option>
+                            <option>Medical Record Request</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Message</label>
+                        <textarea rows="5" placeholder="How can we help you?" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; background: var(--primary-alt);">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer"></footer>
+    <script>
+        document.getElementById('contactForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert('Thank you! Your inquiry has been sent. We will contact you shortly.');
+            e.target.reset();
+        };
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>

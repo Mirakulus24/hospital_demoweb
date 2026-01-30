@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Services | MediFlow</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-plus-square"></i> MediFlow</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="doctors.html">Doctors</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="btn-primary">Login</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-header" style="background: var(--light); padding: 60px 5%; text-align: center;">
+        <h1>Our Medical Services</h1>
+        <p>Comprehensive healthcare solutions tailored to your needs.</p>
+    </section>
+
+    <section class="grid" id="servicesGrid">
+        <div class="card service-detail">
+            <div class="icon-box"><i class="fas fa-heartbeat"></i></div>
+            <h3>Cardiology</h3>
+            <p>From routine checkups to complex heart surgeries, our cardiac team uses the latest minimally invasive techniques.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> ECG & Stress Testing</li>
+                <li><i class="fas fa-check"></i> Angioplasty</li>
+            </ul>
+        </div>
+        <div class="card service-detail">
+            <div class="icon-box"><i class="fas fa-baby"></i></div>
+            <h3>Pediatrics</h3>
+            <p>Dedicated care for infants, children, and adolescents in a friendly and comforting environment.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> Vaccinations</li>
+                <li><i class="fas fa-check"></i> Growth Monitoring</li>
+            </ul>
+        </div>
+        <div class="card service-detail">
+            <div class="icon-box"><i class="fas fa-bone"></i></div>
+            <h3>Orthopedics</h3>
+            <p>Specializing in joint replacements, sports medicine, and spinal care to get you back on your feet.</p>
+            <ul class="service-list">
+                <li><i class="fas fa-check"></i> Joint Surgery</li>
+                <li><i class="fas fa-check"></i> Physical Therapy</li>
+            </ul>
+        </div>
+    </section>
+    <section class="section">
+    <div class="tabs-container" style="max-width: 900px; margin: 0 auto;">
+        <div class="tab-header" style="display: flex; gap: 20px; border-bottom: 2px solid #e2e8f0; margin-bottom: 2rem;">
+            <button class="tab-btn active" onclick="openTab(event, 'Inpatient')">Inpatient Care</button>
+            <button class="tab-btn" onclick="openTab(event, 'Outpatient')">Outpatient Care</button>
+            <button class="tab-btn" onclick="openTab(event, 'Diagnostic')">Diagnostic Services</button>
+        </div>
+
+        <div id="Inpatient" class="tab-content" style="display: block;">
+            <h3>World-Class Inpatient Facilities</h3>
+            <p>Our private suites offer 24/7 nursing care, personalized nutrition plans, and a healing environment.</p>
+        </div>
+        <div id="Outpatient" class="tab-content" style="display: none;">
+            <h3>Swift & Efficient Outpatient Care</h3>
+            <p>Day surgeries and consultations designed to get you back home the same day.</p>
+        </div>
+        <div id="Diagnostic" class="tab-content" style="display: none;">
+            <h3>Precision Diagnostics</h3>
+            <p>Equipped with the latest 3Tesla MRI and 128-Slice CT scanners for pinpoint accuracy.</p>
+        </div>
+    </div>
+</section>
+
+<script>
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo" style="color: white;"><i class="fas fa-plus-square"></i> MediFlow</a>
+                <p>Leading the way in medical excellence and patient-centric digital healthcare solutions since 2010.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="doctors.html">Our Doctors</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Emergency Help</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Medical Blvd, Health City</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 000-1234</p>
+                <p><i class="fas fa-envelope"></i> contact@mediflow.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MediFlow Hospital Management System. Built for Demo Purposes.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Our Doctors | MediFlow</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-plus-square"></i> MediFlow</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="doctors.html" class="active">Doctors</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="btn-primary">Login</a></li>
+        </ul>
+    </nav>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>Find a Specialist</h2>
+            <div class="filter-container" style="margin-top: 20px;">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="cardiology">Cardiology</button>
+                <button class="filter-btn" data-filter="neurology">Neurology</button>
+                <button class="filter-btn" data-filter="pediatrics">Pediatrics</button>
+            </div>
+        </div>
+        <div class="grid" id="doctorGrid">
+    <div class="doctor-profile-card" data-dept="cardiology">
+        <div class="dr-image-container">
+            <img src="https://ui-avatars.com/api/?name=Sarah+Jenkins&background=6366f1&color=fff&size=200" alt="Dr. Jenkins">
+            <div class="dr-overlay">
+                <a href="login.html" class="btn-primary">View Schedule</a>
+            </div>
+        </div>
+        <div class="dr-details">
+            <span class="dr-tag">Cardiology</span>
+            <h4>Dr. Sarah Jenkins</h4>
+            <p>Specialist in Interventional Cardiology and Heart Surgery.</p>
+            <div class="dr-socials">
+                <i class="fab fa-linkedin"></i>
+                <i class="fas fa-envelope"></i>
+            </div>
+          </div>
+       </div>
+    </div>
+    </section>
+    
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo" style="color: white;"><i class="fas fa-plus-square"></i> MediFlow</a>
+                <p>Leading the way in medical excellence and patient-centric digital healthcare solutions since 2010.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="doctors.html">Our Doctors</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Emergency Help</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Medical Blvd, Health City</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 000-1234</p>
+                <p><i class="fas fa-envelope"></i> contact@mediflow.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MediFlow Hospital Management System. Built for Demo Purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Filter Logic
+        const filters = document.querySelectorAll('.filter-btn');
+        const doctors = document.querySelectorAll('.doctor-card');
+
+        filters.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filters.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                doctors.forEach(dr => {
+                    if (filter === 'all' || dr.getAttribute('data-dept') === filter) {
+                        dr.style.display = 'block';
+                    } else {
+                        dr.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
