@@ -2,150 +2,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Admin - Institutional Command Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FC Admin - Mobile Command</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .active-link { border-left: 4px solid #fff; background: rgba(255,255,255,0.1); color: white !important; }
-        .animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Active State for Mobile Bottom Nav */
+        .active-nav { color: #1e3a8a !important; border-top: 3px solid #1e3a8a; }
+        
+        /* Mobile Table Card Logic */
+        @media (max-width: 768px) {
+            .responsive-table thead { display: none; }
+            .responsive-table tr { display: block; margin-bottom: 1rem; border: 1px solid #e2e8f0; border-radius: 1rem; background: white; padding: 1rem; }
+            .responsive-table td { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border: none; }
+            .responsive-table td::before { content: attr(data-label); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; }
+        }
+
+        /* Bottom Sheet for Mobile Modals */
+        @media (max-width: 640px) {
+            .modal-content { position: fixed; bottom: 0; width: 100%; border-radius: 2rem 2rem 0 0; transform: translateY(100%); transition: transform 0.3s ease-out; }
+            .modal-active .modal-content { transform: translateY(0); }
+        }
     </style>
 </head>
-<body class="bg-slate-100 font-sans antialiased">
+<body class="bg-slate-50 font-sans antialiased pb-20 lg:pb-0">
 
-    <header class="bg-white border-b border-gray-200 fixed w-full z-50 h-16 flex items-center justify-between px-6">
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-40 h-16 flex items-center justify-between px-4 lg:px-8">
         <div class="flex items-center space-x-3">
-            <div class="bg-blue-900 text-white w-8 h-8 flex items-center justify-center rounded font-bold">FC</div>
-            <h1 class="font-bold text-blue-900 hidden md:block uppercase tracking-wider">Faith Clinic Admin</h1>
+            <div class="bg-blue-900 text-white w-8 h-8 flex items-center justify-center rounded-lg font-bold">FC</div>
+            <h1 class="font-bold text-blue-900 text-sm uppercase tracking-tighter">Admin <span class="hidden md:inline">Panel</span></h1>
         </div>
         
-        <div class="flex items-center space-x-6">
-            <div class="flex flex-col text-right hidden sm:block">
+        <div class="flex items-center space-x-4">
+            <div class="hidden sm:flex flex-col text-right">
                 <span class="text-xs font-bold text-gray-800">Dr. Emmanuel</span>
-                <span class="text-[10px] text-green-600 font-bold uppercase italic">Medical Director</span>
+                <span class="text-[9px] text-green-600 font-bold uppercase italic">MD</span>
             </div>
-            <button class="relative text-gray-500 hover:text-blue-900">
-                <i class="fas fa-bell text-xl"></i>
-                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">3</span>
-            </button>
-            <div class="w-10 h-10 bg-slate-300 rounded-full border-2 border-blue-900 overflow-hidden">
-                <img src="https://ui-avatars.com/api/?name=Dr+Emmanuel&background=0D47A1&color=fff" alt="Profile">
+            <div class="w-10 h-10 bg-blue-100 rounded-full border-2 border-blue-900 flex items-center justify-center overflow-hidden">
+                <i class="fas fa-user-md text-blue-900"></i>
             </div>
         </div>
     </header>
 
-    <div class="flex pt-16">
-        <aside class="w-20 lg:w-64 bg-blue-950 min-h-screen text-slate-300 fixed">
-            <nav class="mt-8 space-y-2 px-4">
-                <p class="text-[10px] uppercase font-bold text-slate-500 mb-4 px-2 tracking-widest">Main Menu</p>
-                
-                <a href="#" onclick="showSection('reports')" id="nav-reports" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:text-white transition active-link">
-                    <i class="fas fa-chart-pie w-5"></i> <span class="hidden lg:block">Director's Reports</span>
-                </a>
-                
-                <a href="#" onclick="showSection('records')" id="nav-records" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:text-white transition">
-                    <i class="fas fa-file-medical w-5"></i> <span class="hidden lg:block">Medical Records</span>
-                </a>
-
-                <a href="#" onclick="showSection('staffing')" id="nav-staffing" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:text-white transition">
-                    <i class="fas fa-user-nurse w-5"></i> <span class="hidden lg:block">Staffing Registry</span>
-                </a>
-
-                <a href="#" onclick="showSection('inventory')" id="nav-inventory" class="nav-item flex items-center space-x-3 p-3 rounded-lg hover:text-white transition">
-                    <i class="fas fa-boxes-stacked w-5"></i> <span class="hidden lg:block">Lab Inventory</span>
-                </a>
-                
-                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:text-white transition opacity-50 cursor-not-allowed">
-                    <i class="fas fa-receipt w-5"></i> <span class="hidden lg:block">Billing & HMO</span>
-                </a>
-                <a href="index.html" class="sidebar-item text-red-400 flex items-center space-x-4 p-3 rounded-xl transition font-medium">
-                    <i class="fas fa-sign-out-alt"></i> <span class="hidden lg:block">Logout</span>
-                </a>
+    <div class="flex">
+        <aside class="hidden lg:flex w-64 bg-white border-r min-h-screen flex-col sticky top-16 h-[calc(100vh-64px)]">
+            <nav class="flex-1 p-6 space-y-2">
+                <p class="text-[10px] uppercase font-bold text-slate-400 mb-4 tracking-widest">Management</p>
+                <button onclick="showSection('reports')" id="nav-reports" class="admin-nav w-full flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-blue-50 transition font-semibold active-nav">
+                    <i class="fas fa-chart-pie"></i> <span>Reports</span>
+                </button>
+                <button onclick="showSection('records')" id="nav-records" class="admin-nav w-full flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-blue-50 transition font-semibold">
+                    <i class="fas fa-file-medical"></i> <span>Records</span>
+                </button>
+                <button onclick="showSection('staffing')" id="nav-staffing" class="admin-nav w-full flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-blue-50 transition font-semibold">
+                    <i class="fas fa-user-nurse"></i> <span>Staffing</span>
+                </button>
+                <button onclick="showSection('inventory')" id="nav-inventory" class="admin-nav w-full flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-blue-50 transition font-semibold">
+                    <i class="fas fa-boxes-stacked"></i> <span>Inventory</span>
+                </button>
             </nav>
+            <div class="p-6 border-t">
+                <a href="index.html" class="flex items-center space-x-3 text-red-500 font-bold text-sm">
+                    <i class="fas fa-sign-out-alt"></i> <span>Exit Command</span>
+                </a>
+            </div>
         </aside>
 
-        <main class="ml-20 lg:ml-64 p-8 w-full">
+        <main class="flex-1 p-4 lg:p-8 w-full max-w-7xl mx-auto">
             
-            <div id="reports-section" class="content-section animate-fade-in">
-                <div class="mb-8">
-                    <h2 class="text-2xl font-bold text-slate-800">Monthly Performance Report</h2>
-                    <p class="text-sm text-gray-500 italic">"Tracking 20 years of growth - Data for February 2026"</p>
+            <div class="flex overflow-x-auto gap-4 no-scrollbar pb-4 -mx-4 px-4 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-4">
+                <div class="min-w-[160px] flex-1 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Admissions</p>
+                    <h3 class="text-xl font-bold text-blue-900">1,402</h3>
+                    <span class="text-[9px] text-green-500 font-bold">+8% <i class="fas fa-arrow-up"></i></span>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-blue-600">
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Total Admissions</p>
-                        <h3 class="text-3xl font-bold">1,402</h3>
-                        <p class="text-xs text-green-500 mt-2 font-bold"><i class="fas fa-caret-up"></i> 8% from Jan</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-purple-600">
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Surgical Success</p>
-                        <h3 class="text-3xl font-bold">99.2%</h3>
-                        <p class="text-xs text-gray-400 mt-2 font-bold">48 Procedures this month</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-green-600">
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Revenue (HMO/Cash)</p>
-                        <h3 class="text-3xl font-bold">₦22.4M</h3>
-                        <p class="text-xs text-blue-500 mt-2 font-bold">Target: ₦25M</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-red-600">
-                        <p class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Maternal Deliveries</p>
-                        <h3 class="text-3xl font-bold">64</h3>
-                        <p class="text-xs text-gray-400 mt-2 font-bold">Antenatal & Postnatal</p>
+                <div class="min-w-[160px] flex-1 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Revenue</p>
+                    <h3 class="text-xl font-bold text-blue-900">₦22.4M</h3>
+                    <div class="w-full bg-gray-100 h-1 rounded-full mt-2">
+                        <div class="bg-blue-600 h-1 rounded-full w-[70%]"></div>
                     </div>
                 </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-sm mb-10">
-                    <h4 class="font-bold text-gray-700 mb-6">Patient Flow Trends (2025-2026)</h4>
-                    <div class="h-48 w-full bg-slate-50 rounded-xl flex items-end justify-around p-4 border border-dashed border-slate-200">
-                        <div class="w-12 bg-blue-100 h-1/2 rounded-t-lg"></div>
-                        <div class="w-12 bg-blue-200 h-2/3 rounded-t-lg"></div>
-                        <div class="w-12 bg-blue-400 h-3/4 rounded-t-lg"></div>
-                        <div class="w-12 bg-blue-600 h-full rounded-t-lg"></div>
-                        <div class="w-12 bg-blue-900 h-4/5 rounded-t-lg flex items-center justify-center text-white text-[10px] font-bold">FEB</div>
-                    </div>
+                <div class="min-w-[160px] flex-1 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Success</p>
+                    <h3 class="text-xl font-bold text-purple-600">99.2%</h3>
+                    <p class="text-[9px] text-slate-400 font-bold">48 Surgeries</p>
+                </div>
+                <div class="min-w-[160px] flex-1 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Deliveries</p>
+                    <h3 class="text-xl font-bold text-pink-500">64</h3>
+                    <p class="text-[9px] text-slate-400 font-bold">Feb 2026</p>
                 </div>
             </div>
 
-            <div id="records-section" class="content-section hidden animate-fade-in">
-                <div class="mb-8">
-                    <h2 class="text-2xl font-bold text-slate-800">Diagnostic Result Upload</h2>
-                    <p class="text-sm text-gray-500">Securely push laboratory results to patient portals.</p>
+            <div id="records-section" class="content-section mt-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-slate-800">Medical Records</h2>
+                    <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded-md">Live Sync</span>
+                </div>
+                <div class="relative mb-6">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="patientSearchInput" onkeyup="filterPatients()" placeholder="Search Name or ID..." 
+                    class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-sm shadow-sm">
                 </div>
 
-                <div class="bg-white p-4 rounded-2xl shadow-sm mb-6 flex items-center border border-blue-50">
-                    <i class="fas fa-search text-gray-400 ml-3"></i>
-                    <input type="text" id="patientSearchInput" onkeyup="filterPatients()" placeholder="Search Patient Name or ID..." 
-                    class="w-full px-4 py-2 outline-none text-sm">
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-slate-100">
-                    <table class="w-full text-left">
+                <div class="overflow-hidden">
+                    <table class="w-full text-left responsive-table">
                         <thead class="bg-slate-50 text-slate-400 text-[10px] uppercase font-bold tracking-widest">
                             <tr>
+                                <th class="px-6 py-4">Patient</th>
                                 <th class="px-6 py-4">ID</th>
-                                <th class="px-6 py-4">Full Name</th>
                                 <th class="px-6 py-4">Last Visit</th>
-                                <th class="px-6 py-4">Action</th>
+                                <th class="px-6 py-4 text-right">Action</th>
                             </tr>
                         </thead>
-                        <tbody id="patientTableBody" class="divide-y divide-slate-50">
-                            <tr class="hover:bg-blue-50/50 transition patient-row">
-                                <td class="px-6 py-4 font-mono text-xs text-blue-600">FC-2026-001</td>
-                                <td class="px-6 py-4 font-bold text-slate-700">Sarah O.</td>
-                                <td class="px-6 py-4 text-sm text-slate-400">Feb 02, 2026</td>
-                                <td class="px-6 py-4">
-                                    <button onclick="openUploadModal('Sarah O.', 'FC-2026-001')" class="bg-blue-900 text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-800 transition">Upload Result</button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-blue-50/50 transition patient-row">
-                                <td class="px-6 py-4 font-mono text-xs text-blue-600">FC-2026-002</td>
-                                <td class="px-6 py-4 font-bold text-slate-700">John A.</td>
-                                <td class="px-6 py-4 text-sm text-slate-400">Jan 28, 2026</td>
-                                <td class="px-6 py-4">
-                                    <button onclick="openUploadModal('John A.', 'FC-2026-002')" class="bg-blue-900 text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-800 transition">Upload Result</button>
+                        <tbody id="patientTableBody">
+                            <tr class="patient-row bg-white lg:hover:bg-blue-50/50 transition border-b lg:border-none">
+                                <td class="px-6 py-4 font-bold text-slate-700" data-label="Patient">Sarah O.</td>
+                                <td class="px-6 py-4 font-mono text-xs text-blue-600" data-label="ID">FC-2026-001</td>
+                                <td class="px-6 py-4 text-sm text-slate-400" data-label="Visit">Feb 02, 2026</td>
+                                <td class="px-6 py-4 text-right">
+                                    <button onclick="openUploadModal('Sarah O.', 'FC-2026-001')" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-xs font-bold w-full lg:w-auto">Push Result</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -153,135 +133,95 @@
                 </div>
             </div>
 
-            <div id="staffing-section" class="content-section hidden animate-fade-in">
-                <div class="flex justify-between items-center mb-8">
-                    <div>
-                        <h2 class="text-2xl font-bold text-slate-800">Medical Staff Registry</h2>
-                        <p class="text-sm text-gray-500">Toggle 'On-Call' to update live booking availability.</p>
+            <div id="staffing-section" class="content-section hidden mt-6">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <h2 class="text-lg font-bold text-slate-800 mb-2">Staff Registry</h2>
+                    <p class="text-xs text-slate-500 mb-6 italic">Manage on-call status for the website.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-900 text-white flex items-center justify-center font-bold">DA</div>
+                                <div><p class="text-sm font-bold">Dr. Adebayo</p><p class="text-[10px] text-slate-400">Surgery</p></div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="dr_adebayo_check" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-900"></div>
+                            </label>
+                        </div>
+                        <button onclick="syncStaffStatus()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-200">Sync Live Data</button>
                     </div>
-                    <button onclick="syncStaffStatus()" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold text-sm shadow-lg hover:bg-blue-700 transition">
-                        <i class="fas fa-sync-alt mr-2"></i> Save Status
-                    </button>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-slate-100">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-50 text-slate-400 text-[10px] uppercase font-bold tracking-widest">
-                            <tr>
-                                <th class="px-6 py-4">Specialist</th>
-                                <th class="px-6 py-4">Department</th>
-                                <th class="px-6 py-4">Availability</th>
-                                <th class="px-6 py-4 text-center">On-Call Duty</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-50">
-                            <tr class="hover:bg-blue-50/50 transition">
-                                <td class="px-6 py-4 flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 font-bold text-xs">DA</div>
-                                    <div><p class="text-sm font-bold text-slate-800">Dr. Adebayo</p><p class="text-[10px] text-slate-400 uppercase">Surgeon</p></div>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-slate-600 italic">General Surgery</td>
-                                <td class="px-6 py-4"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold">ACTIVE</span></td>
-                                <td class="px-6 py-4 text-center"><input type="checkbox" id="dr_adebayo_check" checked class="w-5 h-5 accent-blue-900"></td>
-                            </tr>
-                            <tr class="hover:bg-blue-50/50 transition">
-                                <td class="px-6 py-4 flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-800 font-bold text-xs">NO</div>
-                                    <div><p class="text-sm font-bold text-slate-800">Nurse Okoro</p><p class="text-[10px] text-slate-400 uppercase">Head Matron</p></div>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-slate-600 italic">Maternity</td>
-                                <td class="px-6 py-4"><span class="bg-slate-100 text-slate-400 px-3 py-1 rounded-full text-[10px] font-bold">OFF-DUTY</span></td>
-                                <td class="px-6 py-4 text-center"><input type="checkbox" id="nurse_okoro_check" class="w-5 h-5 accent-blue-900"></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
 
-            <div id="inventory-section" class="content-section hidden animate-fade-in">
-                <div class="flex justify-between items-end mb-8">
-                    <div>
-                        <h2 class="text-2xl font-bold text-slate-800">Laboratory Inventory Control</h2>
-                        <p class="text-sm text-gray-500 italic">Supplies for Ultrasonography and Blood Diagnostics</p>
-                    </div>
-                    <button class="bg-blue-900 text-white px-6 py-2 rounded-lg font-bold text-sm">+ Add Stock</button>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-slate-100">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-50 text-slate-500 text-[10px] uppercase font-bold tracking-widest">
-                            <tr>
-                                <th class="px-8 py-4">Supply Name</th>
-                                <th class="px-8 py-4">Current Level</th>
-                                <th class="px-8 py-4">Status</th>
-                                <th class="px-8 py-4">Last Restock</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y text-sm">
-                            <tr>
-                                <td class="px-8 py-4 font-bold text-slate-700">Ultrasound Gel (5L)</td>
-                                <td class="px-8 py-4">12 Units</td>
-                                <td class="px-8 py-4"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase">Optimal</span></td>
-                                <td class="px-8 py-4 text-slate-400 text-xs">01 Feb 2026</td>
-                            </tr>
-                            <tr>
-                                <td class="px-8 py-4 font-bold text-slate-700">Blood Reagent Kit (V3)</td>
-                                <td class="px-8 py-4">2 Kits</td>
-                                <td class="px-8 py-4"><span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase animate-pulse">Critical Low</span></td>
-                                <td class="px-8 py-4 text-slate-400 text-xs">15 Jan 2026</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div id="reports-section" class="content-section hidden mt-6"><p class="text-center py-20 text-slate-400">Reports Analysis Module</p></div>
+            <div id="inventory-section" class="content-section hidden mt-6"><p class="text-center py-20 text-slate-400">Pharmacy & Lab Stock Module</p></div>
 
         </main>
     </div>
 
-    <div id="uploadModal" class="fixed inset-0 z-[60] hidden flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8">
+    <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 px-2 z-50">
+        <button onclick="showSection('reports')" class="mobile-nav-btn flex flex-col items-center text-slate-400 active-nav" data-id="reports">
+            <i class="fas fa-chart-line text-lg"></i>
+            <span class="text-[9px] font-bold mt-1">Data</span>
+        </button>
+        <button onclick="showSection('records')" class="mobile-nav-btn flex flex-col items-center text-slate-400" data-id="records">
+            <i class="fas fa-folder-open text-lg"></i>
+            <span class="text-[9px] font-bold mt-1">Records</span>
+        </button>
+        <button onclick="showSection('staffing')" class="mobile-nav-btn flex flex-col items-center text-slate-400" data-id="staffing">
+            <i class="fas fa-user-md text-lg"></i>
+            <span class="text-[9px] font-bold mt-1">Staff</span>
+        </button>
+        <button onclick="showSection('inventory')" class="mobile-nav-btn flex flex-col items-center text-slate-400" data-id="inventory">
+            <i class="fas fa-box text-lg"></i>
+            <span class="text-[9px] font-bold mt-1">Stock</span>
+        </button>
+    </nav>
+
+    <div id="uploadModal" class="fixed inset-0 z-[60] hidden overflow-hidden">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeUploadModal()"></div>
+        <div class="modal-content relative bg-white h-auto max-h-[90vh] lg:max-w-md lg:mx-auto lg:mt-20 lg:rounded-3xl p-6 shadow-2xl overflow-y-auto">
+            <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-6 lg:hidden"></div>
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-slate-800">New Diagnostic Entry</h3>
-                <button onclick="closeUploadModal()" class="text-gray-400 hover:text-gray-600 text-2xl font-light">&times;</button>
+                <h3 class="text-xl font-bold text-slate-800">Diagnostic Entry</h3>
+                <button onclick="closeUploadModal()" class="hidden lg:block text-slate-400 text-2xl">&times;</button>
             </div>
+            
             <form onsubmit="handleUpload(event)" class="space-y-4">
-                <div>
-                    <label class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Target Patient</label>
-                    <input type="text" id="modalPatientName" readonly class="w-full bg-slate-50 px-4 py-3 border border-slate-100 rounded-xl text-slate-600 font-bold outline-none">
-                </div>
-                <div>
-                    <label class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Service Type</label>
-                    <select id="modalServiceType" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm">
-                        <option>Ultrasonography (Scan)</option>
-                        <option>Laboratory Report</option>
-                        <option>Surgical Clearance</option>
-                        <option>Immunization Record</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Medical Summary</label>
-                    <textarea id="modalNotes" placeholder="Summary of findings for the patient..." required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none h-24 text-sm"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-blue-900 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-800 transition transform hover:-translate-y-1">
-                    Complete & Push to Portal
-                </button>
+                <input type="text" id="modalPatientName" readonly class="w-full bg-slate-50 p-4 rounded-2xl border-none font-bold text-slate-700">
+                <select id="modalServiceType" class="w-full p-4 bg-white border border-slate-200 rounded-2xl text-sm font-semibold outline-none focus:ring-2 focus:ring-blue-600">
+                    <option>Ultrasonography (Scan)</option>
+                    <option>Laboratory Report</option>
+                    <option>Surgical Clearance</option>
+                </select>
+                <textarea id="modalNotes" placeholder="Medical findings..." required class="w-full p-4 border border-slate-200 rounded-2xl h-32 text-sm focus:ring-2 focus:ring-blue-600 outline-none"></textarea>
+                <button type="submit" id="submitBtn" class="w-full bg-blue-900 text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-blue-800 transition">Complete & Push</button>
             </form>
         </div>
     </div>
 
     <script>
-        let currentPatientId = '';
-
-        // SECTION NAVIGATION LOGIC
+        // SECTION NAVIGATION (RESPONSIVE)
         function showSection(sectionId) {
             document.querySelectorAll('.content-section').forEach(el => el.classList.add('hidden'));
             document.getElementById(sectionId + '-section').classList.remove('hidden');
             
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active-link'));
-            document.getElementById('nav-' + sectionId).classList.add('active-link');
+            // Desktop Sidebar Update
+            document.querySelectorAll('.admin-nav').forEach(el => el.classList.remove('active-nav', 'bg-blue-50', 'text-blue-900'));
+            const desktopNav = document.getElementById('nav-' + sectionId);
+            if(desktopNav) {
+                desktopNav.classList.add('active-nav', 'bg-blue-50', 'text-blue-900');
+            }
+
+            // Mobile Nav Update
+            document.querySelectorAll('.mobile-nav-btn').forEach(el => el.classList.remove('active-nav'));
+            const mobileNav = document.querySelector(`.mobile-nav-btn[data-id="${sectionId}"]`);
+            if(mobileNav) mobileNav.classList.add('active-nav');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // PATIENT SEARCH LOGIC
+        // SEARCH
         function filterPatients() {
             let input = document.getElementById('patientSearchInput').value.toLowerCase();
             let rows = document.querySelectorAll('.patient-row');
@@ -290,46 +230,46 @@
             });
         }
 
-        // UPLOAD SYSTEM LOGIC
+        // MODAL
         function openUploadModal(name, id) {
             currentPatientId = id;
             document.getElementById('modalPatientName').value = name;
-            document.getElementById('uploadModal').classList.remove('hidden');
+            const modal = document.getElementById('uploadModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.add('modal-active'), 10);
         }
 
         function closeUploadModal() {
-            document.getElementById('uploadModal').classList.add('hidden');
+            const modal = document.getElementById('uploadModal');
+            modal.classList.remove('modal-active');
+            setTimeout(() => modal.classList.add('hidden'), 300);
         }
 
+        // DATA SYNC
         function handleUpload(event) {
             event.preventDefault();
-            const service = document.getElementById('modalServiceType').value;
-            const note = document.getElementById('modalNotes').value;
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> Syncing...';
             
-            // Logic to save to memory (Local Storage)
-            let records = JSON.parse(localStorage.getItem(`history_${currentPatientId}`)) || [];
-            records.push({
-                id: Date.now(),
-                service: service,
-                doctor: "Dr. Emmanuel",
-                date: new Date().toLocaleDateString('en-GB'),
-                note: note
-            });
-            localStorage.setItem(`history_${currentPatientId}`, JSON.stringify(records));
-            
-            alert(`Success! Result for ${currentPatientId} has been synced.`);
-            closeUploadModal();
-            document.getElementById('modalNotes').value = '';
+            setTimeout(() => {
+                const service = document.getElementById('modalServiceType').value;
+                const note = document.getElementById('modalNotes').value;
+                let records = JSON.parse(localStorage.getItem(`history_${currentPatientId}`)) || [];
+                records.push({ id: Date.now(), service, doctor: "Dr. Emmanuel", date: new Date().toLocaleDateString('en-GB'), note });
+                localStorage.setItem(`history_${currentPatientId}`, JSON.stringify(records));
+                
+                alert("Success! Synchronized with Patient Portal.");
+                btn.innerHTML = 'Complete & Push';
+                closeUploadModal();
+            }, 800);
         }
 
-        // STAFF SYNC LOGIC
         function syncStaffStatus() {
             const specialists = [
-                { name: "Dr. Adebayo", dept: "General Surgery", active: document.getElementById('dr_adebayo_check').checked },
-                { name: "Nurse Okoro", dept: "Maternity/Antenatal", active: document.getElementById('nurse_okoro_check').checked }
+                { name: "Dr. Adebayo", dept: "General Surgery", active: document.getElementById('dr_adebayo_check').checked }
             ];
             localStorage.setItem('hospitalStaff', JSON.stringify(specialists));
-            alert("Staff availability synced with the Homepage!");
+            alert("Live availability updated!");
         }
     </script>
 </body>
