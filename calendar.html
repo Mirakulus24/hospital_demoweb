@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC Sync - Calendar Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-100 p-4 md:p-10">
+
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-blue-900">Live Schedule Synchronization</h1>
+            <p class="text-gray-500 italic">"Efficiency at the gate, Healing at the ward."</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-blue-100">
+                <div class="bg-blue-600 p-6 text-white flex justify-between items-center">
+                    <div>
+                        <p class="text-xs uppercase font-bold opacity-80">Patient View</p>
+                        <h2 class="text-xl font-bold">Book a Specialist</h2>
+                    </div>
+                    <i class="fas fa-user-circle text-2xl"></i>
+                </div>
+                
+                <div class="p-8 space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Select Department</label>
+                        <select id="deptSelect" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>Antenatal Clinic</option>
+                            <option>General Surgery</option>
+                            <option>Pediatrics</option>
+                            <option>Infertility Specialist</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Available Slots (Today)</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="syncAppointment('10:00 AM')" class="p-3 border rounded-xl hover:bg-blue-50 hover:border-blue-500 transition font-medium text-gray-600">10:00 AM</button>
+                            <button onclick="syncAppointment('01:30 PM')" class="p-3 border rounded-xl hover:bg-blue-50 hover:border-blue-500 transition font-medium text-gray-600">01:30 PM</button>
+                        </div>
+                    </div>
+
+                    <div id="patientStatus" class="hidden animate-bounce bg-green-50 text-green-700 p-4 rounded-xl text-center font-bold text-sm">
+                        <i class="fas fa-check-circle mr-2"></i> Request Sent to Admin!
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 rounded-3xl shadow-xl overflow-hidden border border-slate-800">
+                <div class="bg-slate-800 p-6 text-white flex justify-between items-center">
+                    <div>
+                        <p class="text-xs uppercase font-bold text-blue-400">Admin Live Feed</p>
+                        <h2 class="text-xl font-bold">Master Schedule</h2>
+                    </div>
+                    <span class="flex items-center text-xs text-green-400"><i class="fas fa-circle mr-2 animate-pulse"></i> LIVE</span>
+                </div>
+
+                <div class="p-8">
+                    <div id="adminSchedule" class="space-y-4">
+                        <div class="flex items-center justify-between bg-slate-800 p-4 rounded-2xl border border-slate-700">
+                            <div class="flex items-center space-x-4">
+                                <div class="text-blue-400 font-bold">09:00</div>
+                                <div>
+                                    <p class="text-white font-medium text-sm">John Doe</p>
+                                    <p class="text-slate-500 text-[10px] uppercase">General Medical</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] bg-green-900 text-green-300 px-2 py-1 rounded">Confirmed</span>
+                        </div>
+
+                        <div id="syncedSlot" class="hidden flex items-center justify-between bg-blue-900 p-4 rounded-2xl border border-blue-400 animate-pulse">
+                            <div class="flex items-center space-x-4">
+                                <div id="syncTime" class="text-white font-bold">--:--</div>
+                                <div>
+                                    <p class="text-white font-medium text-sm italic">New Request: Amina Bello</p>
+                                    <p id="syncDept" class="text-blue-200 text-[10px] uppercase">--</p>
+                                </div>
+                            </div>
+                            <button class="text-[10px] bg-white text-blue-900 px-2 py-1 rounded font-bold">Approve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function syncAppointment(time) {
+            const dept = document.getElementById('deptSelect').value;
+            
+            // Show Patient Success
+            document.getElementById('patientStatus').classList.remove('hidden');
+            
+            // Update Admin View
+            document.getElementById('syncTime').innerText = time;
+            document.getElementById('syncDept').innerText = dept;
+            document.getElementById('syncedSlot').classList.remove('hidden');
+
+            setTimeout(() => {
+                alert("This interaction demonstrates how the Patient Portal and Hospital Admin Dashboard stay in sync in real-time.");
+            }, 500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Demo - Trust & Care</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .modal-overlay { transition: opacity 0.3s ease; }
+        .modal-content { transition: transform 0.3s ease; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .animate-fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans">
+
+    <nav class="bg-white border-b sticky top-0 z-50">
+       <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div class="flex items-center space-x-4">
+             <div class="bg-blue-900 text-white p-2 rounded-lg font-bold text-2xl">FC</div>
+             <div>
+                <h1 class="font-bold text-xl text-blue-900 leading-none uppercase">Faith Clinic & Specialist Hospital</h1>
+                <p class="text-[10px] tracking-[0.2em] uppercase text-gray-500 font-semibold mt-1">20 Years of Excellence</p>
+             </div>
+          </div>
+
+          <div class="hidden lg:flex space-x-8 items-center">
+            <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+            
+            <div class="group h-full py-4">
+                <button class="flex items-center text-gray-700 group-hover:text-blue-600 font-medium">
+                    Medical Centers <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </button>
+                
+                <div class="absolute left-0 top-full w-full bg-white shadow-xl border-t border-gray-100 hidden group-hover:grid grid-cols-4 p-10">
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-blue-900 border-b pb-2 italic">Maternal & Child</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li><a href="#" class="hover:text-blue-600 transition">Antenatal Care</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Postnatal Care</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Pediatrics & Immunization</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-blue-900 border-b pb-2 italic">Specialized Medicine</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li><a href="#" class="hover:text-blue-600 transition">Infertility Clinic</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Family Planning</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Genealogical Care</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-blue-900 border-b pb-2 italic">Surgery & Diagnostics</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li><a href="#" class="hover:text-blue-600 transition">General Surgery</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Ultrasonography (Scan)</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Diagnostics & Lab</a></li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-xl">
+                        <h4 class="font-bold text-blue-900 mb-2">Emergency?</h4>
+                        <p class="text-xs text-gray-500 mb-4">Our trauma team is available 24/7 for urgent surgical needs.</p>
+                        <a href="tel:+123" class="bg-red-600 text-white text-xs px-4 py-2 rounded-full font-bold">CALL NOW</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium">Our Legacy</a>
+            
+            <div class="relative group">
+                <button class="bg-blue-900 text-white px-6 py-2 rounded-lg font-bold shadow-lg flex items-center">
+                    Book Portal <i class="fas fa-caret-down ml-2"></i>
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-white border rounded-xl shadow-xl hidden group-hover:block overflow-hidden z-50">
+                    <a href="#" onclick="toggleModal()" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 border-b font-bold">New Appointment</a>
+                    <a href="patient-dashboard.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 border-b">Patient Login</a>
+                    <a href="admin-dashboard.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50">Admin/Staff Login</a>
+                </div>
+            </div>
+          </div>
+       </div>
+    </nav>
+
+    <section class="bg-blue-900 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">Professional Care You Can Trust</h2>
+            <p class="text-blue-100 max-w-2xl mx-auto">Providing specialized medical services from diagnostics to general surgery with a focus on compassion and excellence.</p>
+        </div>
+    </section>
+
+    <section class="py-12 container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+            <h3 class="text-2xl font-bold text-gray-800">Our Specialties</h3>
+            <input type="text" id="serviceSearch" placeholder="Find a service..." 
+            class="mt-4 md:mt-0 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none w-full md:w-64">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" id="servicesGrid">
+            <div class="service-card bg-white p-6 rounded-xl border border-gray-100 shadow-sm" data-name="Ultrasonography Scan">
+                <div class="text-blue-600 text-2xl mb-3"><i class="fas fa-wave-square"></i></div>
+                <h4 class="font-bold text-gray-800">Ultrasonography</h4>
+                <p class="text-sm text-gray-500 mt-2">High-resolution imaging for accurate internal diagnostics.</p>
+            </div>
+            <div class="service-card bg-white p-6 rounded-xl border border-gray-100 shadow-sm" data-name="Infertility Treatment">
+                <div class="text-blue-600 text-2xl mb-3"><i class="fas fa-seedling"></i></div>
+                <h4 class="font-bold text-gray-800">Infertility</h4>
+                <p class="text-sm text-gray-500 mt-2">Compassionate support and advanced fertility solutions.</p>
+            </div>
+            <div class="service-card bg-white p-6 rounded-xl border border-gray-100 shadow-sm" data-name="Immunization Vaccines">
+                <div class="text-blue-600 text-2xl mb-3"><i class="fas fa-syringe"></i></div>
+                <h4 class="font-bold text-gray-800">Immunization</h4>
+                <p class="text-sm text-gray-500 mt-2">Routine vaccinations to keep your family protected.</p>
+            </div>
+            <div class="service-card bg-white p-6 rounded-xl border border-gray-100 shadow-sm" data-name="Family Planning">
+                <div class="text-blue-600 text-2xl mb-3"><i class="fas fa-users"></i></div>
+                <h4 class="font-bold text-gray-800">Family Planning</h4>
+                <p class="text-sm text-gray-500 mt-2">Expert counseling and reproductive health services.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">What Our Patients Say</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-blue-600">
+                    <p class="text-gray-600 italic mb-4">"The antenatal and postnatal care I received here was exceptional. The nurses are so patient and caring. Truly, God heals through them."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">SO</div>
+                        <div class="ml-3"><p class="text-sm font-bold text-gray-800">Sarah O.</p><p class="text-xs text-gray-500">Maternity Patient</p></div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-blue-600">
+                    <p class="text-gray-600 italic mb-4">"Fast diagnostic results and a very clean laboratory. I did my ultrasonography here and the doctor explained everything clearly."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">JA</div>
+                        <div class="ml-3"><p class="text-sm font-bold text-gray-800">John A.</p><p class="text-xs text-gray-500">Diagnostic Services</p></div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-blue-600">
+                    <p class="text-gray-600 italic mb-4">"The pediatrics department is the best in the city. My kids actually enjoy visiting the doctor now. Highly recommended!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">ME</div>
+                        <div class="ml-3"><p class="text-sm font-bold text-gray-800">Mary E.</p><p class="text-xs text-gray-500">Parent</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-slate-50">
+       <div class="container mx-auto px-6">
+         <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-blue-900">20 Years of Faith & Healing</h2>
+            <p class="text-gray-500 mt-4 max-w-xl mx-auto italic">"We open the gate, God heals. Our journey from a single ward to a specialized institution."</p>
+          </div>
+
+          <div class="relative wrap overflow-hidden p-10 h-full">
+             <div class="absolute border-opacity-20 border-gray-400 h-full border" style="left: 50%"></div>
+               <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                   <div class="order-1 w-5/12"></div>
+                    <div class="z-20 flex items-center order-1 bg-blue-900 shadow-xl w-10 h-10 rounded-full">
+                    <h1 class="mx-auto font-semibold text-lg text-white">06</h1>
+                </div>
+                <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4 border-l-4 border-blue-900">
+                    <h3 class="mb-3 font-bold text-gray-800 text-xl">The Foundation</h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">Faith Clinic opened its gates for the first time with a focus on General Medical Treatment and a small maternity ward.</p>
+                </div>
+            </div>
+            <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                <div class="order-1 w-5/12"></div>
+                <div class="z-20 flex items-center order-1 bg-blue-600 shadow-xl w-10 h-10 rounded-full">
+                    <h1 class="mx-auto text-white font-semibold text-lg">15</h1>
+                </div>
+                <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4 border-r-4 border-blue-600 text-right">
+                    <h3 class="mb-3 font-bold text-gray-800 text-xl">Diagnostic Excellence</h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">Launched our fully automated Laboratory and Ultrasonography suite.</p>
+                </div>
+            </div>
+            <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                <div class="order-1 w-5/12"></div>
+                <div class="z-20 flex items-center order-1 bg-green-600 shadow-xl w-10 h-10 rounded-full">
+                    <h1 class="mx-auto font-semibold text-lg text-white">26</h1>
+                </div>
+                <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4 border-l-4 border-green-600">
+                    <h3 class="mb-3 font-bold text-gray-800 text-xl">Specialist Hospital Status</h3>
+                    <p class="text-sm leading-snug tracking-wide text-gray-600">Premier specialist center for Infertility, Surgery, and Pediatrics.</p>
+                </div>
+            </div>
+           </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-white border-t border-b border-gray-100 overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-8">
+            <h4 class="text-sm font-bold text-blue-900 uppercase tracking-widest">Accredited Insurance Partners</h4>
+            <p class="text-gray-500 text-xs mt-1">We accept most major HMOs and Corporate Insurance plans</p>
+        </div>
+        <div class="flex space-x-12 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500 overflow-x-auto no-scrollbar">
+            <div class="flex-shrink-0 flex items-center space-x-2"><div class="w-12 h-12 bg-gray-200 rounded-full"></div><span class="font-bold text-gray-400">NHIS ACCREDITED</span></div>
+            <div class="flex-shrink-0 flex items-center space-x-2"><div class="w-12 h-12 bg-gray-200 rounded-full"></div><span class="font-bold text-gray-400">AXA MANSARD</span></div>
+            <div class="flex-shrink-0 flex items-center space-x-2"><div class="w-12 h-12 bg-gray-200 rounded-full"></div><span class="font-bold text-gray-400">RELIANCE HMO</span></div>
+            <div class="flex-shrink-0 flex items-center space-x-2"><div class="w-12 h-12 bg-gray-200 rounded-full"></div><span class="font-bold text-gray-400">HYGEIA HEALTH</span></div>
+        </div>
+      </div>
+   </section>
+
+   <section class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row gap-12">
+            <div class="md:w-1/3">
+                <h2 class="text-3xl font-bold text-blue-900 mb-6">Patient Preparation</h2>
+                <p class="text-gray-600 mb-8">Certain procedures require specific preparation. Please select your service to view instructions.</p>
+                <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-600">
+                    <p class="text-sm text-blue-800 font-medium italic">"Preparation is the first step toward healing."</p>
+                </div>
+            </div>
+            <div class="md:w-2/3 bg-slate-50 p-8 rounded-3xl shadow-inner">
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button onclick="showPrep('ultra')" class="prep-btn active bg-blue-900 text-white px-6 py-2 rounded-full text-sm font-bold transition">Ultrasonography</button>
+                    <button onclick="showPrep('surgery')" class="prep-btn bg-white text-gray-600 px-6 py-2 rounded-full text-sm font-bold border hover:border-blue-900 transition">General Surgery</button>
+                    <button onclick="showPrep('lab')" class="prep-btn bg-white text-gray-600 px-6 py-2 rounded-full text-sm font-bold border hover:border-blue-900 transition">Laboratory/Fast Tests</button>
+                </div>
+                <div id="ultra-prep" class="prep-content space-y-4 animate-fade-in">
+                    <h4 class="text-xl font-bold text-gray-800 flex items-center"><i class="fas fa-faucet text-blue-600 mr-3"></i> Pelvic/Obstetric Scan</h4>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Drink 1 liter of water 1 hour before the exam.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Do not empty your bladder until the scan is complete.</li>
+                    </ul>
+                </div>
+                <div id="surgery-prep" class="prep-content hidden space-y-4 animate-fade-in">
+                    <h4 class="text-xl font-bold text-gray-800 flex items-center"><i class="fas fa-clock text-blue-600 mr-3"></i> Pre-Surgical Protocol</h4>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Fasting: No food or water 8 hours prior to surgery.</li>
+                    </ul>
+                </div>
+                <div id="lab-prep" class="prep-content hidden space-y-4 animate-fade-in">
+                    <h4 class="text-xl font-bold text-gray-800 flex items-center"><i class="fas fa-flask text-blue-600 mr-3"></i> Blood & Diagnostic Tests</h4>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> For Fasting Blood Sugar: 8–12 hours of overnight fasting.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+   </section>
+
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm" onclick="toggleModal()"></div>
+        <div class="relative min-h-screen flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+                <button onclick="toggleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">&times;</button>
+                <div id="formContainer">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Book Appointment</h3>
+                    <form id="appointmentForm" class="space-y-4">
+                        <input type="text" placeholder="Full Name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <select class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option>General Medical Treatment</option>
+                            <option>Pediatrics</option>
+                            <option>Antenatal Care</option>
+                        </select>
+                        <input type="date" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Submit Request</button>
+                    </form>
+                </div>
+                <div id="successMessage" class="hidden text-center py-10">
+                    <div class="text-green-500 text-6xl mb-4"><i class="fas fa-check-circle"></i></div>
+                    <h3 class="text-2xl font-bold text-gray-800">Request Sent!</h3>
+                    <p class="text-gray-500 mt-2">God heals. Click below to view the master schedule.</p>
+                    <a href="calendar.html?view=patient" class="mt-6 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-bold">View Shared Calendar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 mt-10">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-800 tracking-tight">20 Years of Faith Hospital</h2>
+            <p class="text-sm text-blue-600 font-medium">"Established 2006 • Restoring Health for Two Decades"</p>
+        </div>
+        <div class="hidden md:block text-right">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Archive Serial</span>
+            <p class="text-xs font-mono text-slate-500">FC-HIST-2026</p>
+        </div>
+      </div>
+
+      <div class="flex space-x-6 overflow-x-auto pb-6 no-scrollbar snap-x">
+        
+        <div class="min-w-[280px] snap-center group">
+            <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-slate-200 shadow-md transition-transform duration-500 group-hover:scale-[1.02]">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80" 
+                     alt="Faith Clinic 2006" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-5">
+                    <span class="text-blue-400 text-[10px] font-bold uppercase mb-1">The Foundation</span>
+                    <h3 class="text-white font-bold">First Ward Opening</h3>
+                    <p class="text-white/70 text-[10px] mt-1 italic">October 14, 2006</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="min-w-[280px] snap-center group">
+            <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-slate-200 shadow-md transition-transform duration-500 group-hover:scale-[1.02]">
+                <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80" 
+                     alt="Community Outreach 2015" class="absolute inset-0 w-full h-full object-cover sepia-[.5] hover:sepia-0 transition-all duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-5">
+                    <span class="text-blue-400 text-[10px] font-bold uppercase mb-1">Community Impact</span>
+                    <h3 class="text-white font-bold">1,000th Delivery Celebration</h3>
+                    <p class="text-white/70 text-[10px] mt-1 italic">June 20, 2015</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="min-w-[280px] snap-center group">
+            <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-slate-200 shadow-md transition-transform duration-500 group-hover:scale-[1.02]">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" 
+                     alt="Modern Diagnostics 2026" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-transparent to-transparent flex flex-col justify-end p-5">
+                    <span class="text-blue-300 text-[10px] font-bold uppercase mb-1">Present Day</span>
+                    <h3 class="text-white font-bold">Digital Transformation</h3>
+                    <p class="text-white/70 text-[10px] mt-1 italic">February 2026</p>
+                </div>
+            </div>
+        </div>
+
+      </div>
+
+     <div class="mt-8 border-t border-slate-50 pt-6 text-center">
+        <p class="text-slate-500 italic text-sm">
+            "We aren't just treating patients; we are honoring the families who have trusted us for two decades."
+        </p>
+        <div class="flex justify-center mt-3">
+             <div class="h-1 w-12 bg-blue-600 rounded-full"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">FAITH CLINIC</h4>
+                    <p class="text-gray-400 text-sm">Providing excellence in medical services, genealogical care, and general surgery. We are committed to your health and well-being.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><a href="patient-dashboard.html" class="hover:text-blue-400">Patient Dashboard</a></li>
+                        <li><a href="admin-dashboard.html" class="hover:text-blue-400">Staff Portal</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Laboratory Hours</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact Us</h4>
+                    <p class="text-gray-400 text-sm"><i class="fas fa-map-marker-alt mr-2"></i> 123 Hospital Way, Health City</p>
+                    <p class="text-gray-400 text-sm mt-2"><i class="fas fa-phone mr-2"></i> +234 800 123 4567</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+                &copy; 2026 Faith Clinic. All Rights Reserved. <strong>"We open the gate, God heals."</strong>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function showPrep(type) {
+            document.querySelectorAll('.prep-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(type + '-prep').classList.remove('hidden');
+            document.querySelectorAll('.prep-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-900', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-600');
+            });
+            event.currentTarget.classList.add('bg-blue-900', 'text-white');
+        }
+
+        document.getElementById('serviceSearch').addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            document.querySelectorAll('.service-card').forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(val) ? 'block' : 'none';
+            });
+        });
+
+        document.getElementById('appointmentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+        });
+
+          // homepage.html - Add inside your existing <script> tag
+         function updateAvailableSpecialists() {
+          const staffData = JSON.parse(localStorage.getItem('hospitalStaff'));
+          const selectDropdown = document.querySelector('#appointmentForm select');
+    
+           if (staffData) {
+           // Clear current options
+          selectDropdown.innerHTML = '<option disabled selected>Select an Available Specialist</option>';
+        
+          // Only add staff who are marked 'active' by the Admin
+            staffData.forEach(staff => {
+            if (staff.active) {
+                const option = document.createElement('option');
+                option.value = staff.name;
+                option.textContent = `${staff.name} (${staff.dept})`;
+                selectDropdown.appendChild(option);
+            }
+        });
+    }
+}
+
+// Trigger this every time the booking modal is opened
+const originalToggleModal = toggleModal;
+toggleModal = function() {
+    originalToggleModal();
+    if (!document.getElementById('bookingModal').classList.contains('hidden')) {
+        updateAvailableSpecialists();
+    }
+}
+    </script>
+</body>
+</html>

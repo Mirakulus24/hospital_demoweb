@@ -2,131 +2,216 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Health | MediFlow Patient Portal</title>
-    <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Portal - Faith Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar-item:hover { background: rgba(59, 130, 246, 0.1); color: #1e40af; }
+        .active-nav { background: #1e40af; color: white !important; }
+        .animate-pulse-subtle { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+    </style>
 </head>
-<body>
-    <div class="dashboard-wrapper">
-        <aside class="sidebar">
-            <div class="logo"><i class="fas fa-u"></i> Union</div>
-            <nav style="margin-top: 2rem; flex-grow: 1;">
-                <a href="#" class="nav-item active"><i class="fas fa-columns"></i> Overview</a>
-                <a href="#" class="nav-item" id="bookBtn"><i class="fas fa-calendar-plus"></i> Book Appointment</a>
-                <a href="#" class="nav-item"><i class="fas fa-file-medical"></i> Medical Records</a>
-                <a href="#" class="nav-item"><i class="fas fa-pills"></i> Prescriptions</a>
-                <a href="#" class="nav-item"><i class="fas fa-file-invoice-dollar"></i> Billing</a>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="#" class="nav-item"><i class="fas fa-user-cog"></i> Profile Settings</a>
-                <a href="#" onclick="logout()" class="nav-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+<body class="bg-slate-50 font-sans antialiased">
+
+    <header class="bg-white border-b border-gray-200 fixed w-full z-50 h-16 flex items-center justify-between px-4 lg:px-8">
+        <div class="flex items-center space-x-3">
+            <div class="bg-blue-600 text-white w-8 h-8 flex items-center justify-center rounded-lg font-bold">FC</div>
+            <h1 class="font-bold text-gray-800 text-sm md:text-base uppercase tracking-tight">Patient Care Portal</h1>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-400 hover:text-blue-600 relative p-2">
+                <i class="fas fa-bell text-xl"></i>
+                <span id="result-notification" class="hidden absolute top-1 right-1 bg-red-600 w-2 h-2 rounded-full border-2 border-white animate-bounce"></span>
+            </button>
+            <div class="h-8 w-[1px] bg-gray-200"></div>
+            <div class="flex items-center space-x-3">
+                <div class="flex flex-col text-right">
+                    <span class="text-xs font-bold text-gray-700">Sarah O.</span>
+                    <span class="text-[9px] text-blue-600 font-mono">ID: FC-2026-001</span>
+                </div>
+                <div class="w-10 h-10 bg-blue-100 border border-blue-200 rounded-full flex items-center justify-center text-blue-600 font-bold">SO</div>
             </div>
+        </div>
+    </header>
+
+    <div class="flex pt-16">
+        <aside class="w-20 lg:w-64 bg-white min-h-screen border-r border-gray-100 fixed">
+            <nav class="mt-8 px-4 space-y-2">
+                <a href="#" class="sidebar-item active-nav flex items-center space-x-4 p-3 rounded-xl transition font-medium">
+                    <i class="fas fa-th-large"></i> <span class="hidden lg:block">Overview</span>
+                </a>
+                <a href="#" class="sidebar-item text-gray-500 flex items-center space-x-4 p-3 rounded-xl transition font-medium">
+                    <i class="fas fa-calendar-check"></i> <span class="hidden lg:block">My Appointments</span>
+                </a>
+                <a href="#" class="sidebar-item text-gray-500 flex items-center space-x-4 p-3 rounded-xl transition font-medium">
+                    <i class="fas fa-file-medical-alt"></i> <span class="hidden lg:block">Lab Results</span>
+                </a>
+                <a href="#" class="sidebar-item text-gray-500 flex items-center space-x-4 p-3 rounded-xl transition font-medium">
+                    <i class="fas fa-pills"></i> <span class="hidden lg:block">Prescriptions</span>
+                </a>
+                <hr class="my-4 border-gray-50">
+                <a href="index.html" class="sidebar-item text-red-400 flex items-center space-x-4 p-3 rounded-xl transition font-medium">
+                    <i class="fas fa-sign-out-alt"></i> <span class="hidden lg:block">Logout</span>
+                </a>
+            </nav>
         </aside>
 
-        <main class="main-content">
-            <header class="top-bar">
-                <div class="header-title">
-                    <h1 id="welcomeText">Hello, Patient</h1>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Here is what's happening with your health today.</p>
-                </div>
-                <div class="user-profile">
-                    <button class="btn-primary" style="background: var(--primary-alt);" onclick="document.getElementById('bookingSection').style.display='block'">
-                        <i class="fas fa-plus"></i> New Appointment
-                    </button>
-                </div>
-            </header>
-
-            <section id="bookingSection" class="table-container" style="display:none; margin-bottom: 2rem; border: 2px solid var(--primary-alt);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h3>Schedule a Specialist</h3>
-                    <i class="fas fa-times" style="cursor:pointer" onclick="this.parentElement.parentElement.style.display='none'"></i>
-                </div>
-                <form id="bookingForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                    <div class="form-group">
-                        <label>Department</label>
-                        <select id="dept" required>
-                            <option>Cardiology</option>
-                            <option>Neurology</option>
-                            <option>Pediatrics</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Preferred Date</label>
-                        <input type="date" id="apptDate" required>
-                    </div>
-                    <button type="submit" class="btn-primary" style="grid-column: span 2; background: var(--primary-alt);">Confirm Request</button>
-                </form>
-            </section>
-
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+        <main class="ml-20 lg:ml-64 p-4 lg:p-8 w-full">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-info">
-                                <h3>Next Visit</h3>
-                                <p id="nextVisitDate">Feb 15</p>
-                            </div>
-                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-800">Welcome Back, Sarah</h2>
+                    <p class="text-sm text-gray-500">"We open the gate, God heals." Stay updated with your health journey.</p>
+                </div>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-bold shadow-lg shadow-blue-200 transition text-sm">
+                    <i class="fas fa-plus mr-2"></i> New Appointment
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-8">
+                    <div id="new-result-alert" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-info-circle text-amber-500"></i>
+                            <p class="text-sm text-amber-800 font-medium">A new diagnostic result was recently added to your file.</p>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-info">
-                                <h3>Health Score</h3>
-                                <p>92%</p>
+                        <button onclick="window.location.reload()" class="text-xs font-bold text-amber-600 underline">REFRESH VIEW</button>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                        <h4 class="font-bold text-gray-800 mb-4">Latest Reports</h4>
+                        <div id="latest-results-list" class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-transparent hover:border-blue-100 transition">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-wave-square"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-800">Pelvic Ultrasonography</p>
+                                        <p class="text-[10px] text-gray-400 uppercase tracking-wider">Jan 20, 2026 • Verified</p>
+                                    </div>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800 font-bold text-xs uppercase">Download</button>
                             </div>
-                            <div class="stat-icon" style="color: #10b981; background: #ecfdf5;"><i class="fas fa-heartbeat"></i></div>
                         </div>
                     </div>
 
-                    <div class="table-container">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                            <h3>Recent Appointments</h3>
-                            <a href="#" style="color: var(--primary-alt); font-size: 0.85rem; font-weight: 600;">View All</a>
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                        <div class="flex justify-between items-center mb-6">
+                            <h4 class="font-bold text-gray-800">Medical History Timeline</h4>
+                            <span class="text-[10px] font-bold text-slate-400">SYNCED LIVE</span>
                         </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Doctor</th>
-                                    <th>Department</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="patientApptTable">
-                                <tr>
-                                    <td>Dr. Sarah Jenkins</td>
-                                    <td>Cardiology</td>
-                                    <td>2026-02-15</td>
-                                    <td><span class="status status-available">Confirmed</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div id="timeline-container" class="space-y-6">
+                            <div class="flex gap-4 p-4 border rounded-2xl bg-slate-50 border-slate-100">
+                                <div class="bg-pink-100 text-pink-600 w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
+                                    <i class="fas fa-baby"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <h4 class="font-bold text-slate-800">Immunization: BCG</h4>
+                                        <span class="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-1 rounded">VERIFIED</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-1 italic">Conducted by: Nurse Okoro</p>
+                                    <p class="text-[11px] text-slate-600 mt-2 bg-white p-2 rounded-lg border border-slate-100">Routine neonatal checkup and vaccination.</p>
+                                </div>
+                             </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="activity-feed">
-                    <h3>Medical Timeline</h3>
-                    <div style="margin-top: 1.5rem;">
-                        <div class="activity-item">
-                            <div class="stat-icon" style="width:32px; height:32px; font-size:0.8rem;"><i class="fas fa-file-prescription"></i></div>
-                            <div>
-                                <p style="font-size: 0.85rem;"><strong>Prescription Renewed</strong></p>
-                                <p style="font-size: 0.8rem; color: var(--text-muted);">Atorvastatin - Dr. Jenkins</p>
-                                <small style="color: var(--text-muted);">Yesterday</small>
+                <div class="space-y-8">
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                        <h4 class="font-bold text-gray-800 mb-4">Maternity Progress</h4>
+                        <div class="text-center py-4">
+                            <div class="inline-flex items-center justify-center w-24 h-24 rounded-full border-4 border-blue-600 border-t-transparent animate-pulse-subtle">
+                                <span class="text-xl font-bold text-blue-600">Wk 24</span>
                             </div>
+                            <p class="mt-4 text-sm font-medium text-gray-700">Healthy Progress</p>
                         </div>
-                        <div class="activity-item">
-                            <div class="stat-icon" style="width:32px; height:32px; font-size:0.8rem;"><i class="fas fa-vial"></i></div>
-                            <div>
-                                <p style="font-size: 0.85rem;"><strong>Lab Results Ready</strong></p>
-                                <p style="font-size: 0.8rem; color: var(--text-muted);">Full Blood Count - Main Lab</p>
-                                <small style="color: var(--text-muted);">3 days ago</small>
-                            </div>
+                    </div>
+
+                    <div class="bg-blue-600 rounded-3xl p-6 text-white shadow-lg">
+                        <h4 class="font-bold mb-2">Patient Feedback</h4>
+                        <p class="text-xs text-blue-100 italic leading-relaxed">"20 years of care is a legacy. Faith Clinic isn't just a hospital; it's our family home."</p>
+                        <div class="mt-4 flex items-center space-x-2">
+                             <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-[10px]">FC</div>
+                             <span class="text-[10px] font-bold uppercase">Legacy Honor 2026</span>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-    <script src="dashboard.js"></script>
+
+    <div id="consultModal" class="fixed inset-0 z-[70] hidden flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 text-center">
+        <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-video text-3xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800">Tele-Health Request</h3>
+        <p class="text-sm text-gray-500 mt-2">Connect with your specialist regarding your recent results.</p>
+        <div class="mt-6 space-y-3">
+            <button onclick="confirmConsult()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-blue-700 transition">Request Immediate Call</button>
+            <button onclick="closeConsultModal()" class="w-full bg-slate-100 text-slate-500 font-bold py-3 rounded-xl hover:bg-slate-200 transition">Maybe Later</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // UPDATED LOAD LOGIC: Checking for follow-up keywords
+    function loadMedicalRecords() {
+        const records = JSON.parse(localStorage.getItem(`history_${PATIENT_ID}`)) || [];
+        const container = document.getElementById('timeline-container');
+        
+        if (records.length > 0) {
+            records.reverse().forEach(record => {
+                // Determine if a follow-up button should be shown
+                const needsFollowUp = record.note.toLowerCase().includes('follow-up') || 
+                                     record.note.toLowerCase().includes('consultation');
+                
+                const followUpBtn = needsFollowUp 
+                    ? `<button onclick="openConsultModal()" class="mt-4 w-full bg-red-50 text-red-600 border border-red-100 py-2 rounded-xl text-[10px] font-bold hover:bg-red-600 hover:text-white transition flex items-center justify-center">
+                        <i class="fas fa-video mr-2"></i> ACTION REQUIRED: BOOK FOLLOW-UP
+                       </button>` 
+                    : '';
+
+                const recordHtml = `
+                    <div class="flex gap-4 p-4 border border-blue-200 rounded-2xl bg-blue-50/30 animate-fade-in mb-4">
+                        <div class="bg-blue-600 text-white w-12 h-12 rounded-xl flex items-center justify-center shrink-0">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-bold text-slate-800">${record.service}</h4>
+                                <span class="text-[10px] font-bold bg-blue-600 text-white px-2 py-1 rounded">NEW</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1 italic">Authorized by: ${record.doctor} • ${record.date}</p>
+                            <p class="text-[11px] text-slate-700 mt-3 font-medium border-l-2 border-blue-400 pl-3 py-1">
+                                ${record.note}
+                            </p>
+                            ${followUpBtn}
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('afterbegin', recordHtml);
+            });
+        }
+    }
+
+    function openConsultModal() {
+        document.getElementById('consultModal').classList.remove('hidden');
+    }
+
+    function closeConsultModal() {
+        document.getElementById('consultModal').classList.add('hidden');
+    }
+
+    function confirmConsult() {
+        alert("Consultation request sent! Dr. Emmanuel has been notified.");
+        closeConsultModal();
+    }
+</script>
 </body>
 </html>
